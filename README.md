@@ -23,7 +23,7 @@ https://github.com/NTNU-IE-IIR/mappe-idata1003-traindispatchsystem-MoldyDaniel#l
 
 ## How to run the project
 
-[//]: # (TODO: Describe how to run your project here. What is the main class? What is the main method?(What is the input and output of the program? What is the expected behaviour of the program?)
+<! -- [//]: # (TODO: Describe how to run your project here. What is the main class? What is the main method? What is the input and output of the program? What is the expected behaviour of the program?) -->
 The main class is called TrainDispatchSystem and the main method is called main.
 The input of the program is the user input and the output is the list of departures.
 

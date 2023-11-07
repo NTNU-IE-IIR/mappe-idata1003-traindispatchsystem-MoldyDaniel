@@ -25,6 +25,7 @@ public class TrainDispatchApp {
         System.out.println("The time is " + (clock.getHours()) + ":" + clock.getMinutes());
     }
     /**
+     * Own class for system scanner.
      * Detect what the user writes into the console and convert it to an integer.
      * Then make the clock tick the amount of minutes the user wrote and display the new time.
      */
