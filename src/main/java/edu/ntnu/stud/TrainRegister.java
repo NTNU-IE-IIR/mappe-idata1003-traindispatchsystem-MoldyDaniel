@@ -15,10 +15,21 @@ public class TrainRegister {
     /**
      * Adds the trainClock to the trainRegister.
      * @param increase the amount of time to increase the clock by.
-     *
+     *TODO: Put in clock class.
      */
-    public void incrementTrainClock(String increase){
-        this.TrainClock.increment(increase,this.TrainClock.getTime());
+    public void incrementTrainClock(String increase) {
+        this.TrainClock.increment(increase, this.TrainClock.getTime());
+        /**String[] trainClock = this.TrainClock.getTime().split(":");
+        int hours1 = Integer.parseInt(trainClock[0]);
+        int minutes1 = Integer.parseInt(trainClock[1]);
+        for (Train train : this.trains.values()) {
+            String[] trainDeparture = train.getDepartureTime().split(":");
+            int hours2 = Integer.parseInt(trainDeparture[0]);
+            int minutes2 = Integer.parseInt(trainDeparture[1]);
+            if (hours1 > hours2 || (hours1 == hours2 && minutes1 > minutes2)) {
+                this.trains.remove(train.getTrainNumber());
+            }
+        }*/
     }
     public String getTrainClock(){
         return TrainClock.getTime();
@@ -35,7 +46,20 @@ public class TrainRegister {
             return true;
         }
     }
+
+    /**
+     * Removes the train from the trainRegister if the train is behind the current time.
+     * @param train
+     * @return
+     * TODO:Should not think about the time and only delete.
+     */
     public boolean removeTrains(Train train){
+        if(this.trains.containsKey(train.getTrainNumber())){
+            if(this.TrainClock.getTime().compareTo(train.getDepartureTime()) > 0){
+                this.trains.remove(train.getTrainNumber());
+                return true;
+            }
+        }
         return false;
     }
 
@@ -47,6 +71,11 @@ public class TrainRegister {
         this.addTrains(new Train("126","A1","Oslo","12:00",1));
         this.addTrains(new Train("123","A1","Oslo","12:00",1));
     }
+
+    /**
+     * TODO: Handle the output in the UI class. Only return the values.
+     * @return
+     */
     public String displayTrainRegister(){
         String trainRegister = "";
         for(Train train : this.trains.values()){
@@ -70,6 +99,11 @@ public class TrainRegister {
         }
 
     }
+
+    /**
+     * TODO: Return value instead of printing.
+     * @param destination
+     */
     public void getTrainByDestination(String destination){
         for(Train train : this.trains.values()){
             if(train.getDestination().equals(destination)){
@@ -77,6 +111,11 @@ public class TrainRegister {
             }
         }
     }
+
+    /**
+     * TODO: Return value instead of printing.
+     * @param trainNumber
+     */
     public void getTrainByTrainNumber(String trainNumber){
         for(Train train : this.trains.values()){
             if(train.getTrainNumber().equals(trainNumber)){

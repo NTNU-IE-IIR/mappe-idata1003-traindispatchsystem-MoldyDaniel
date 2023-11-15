@@ -37,7 +37,7 @@ public class Train {
      */
     public String trainToString() {
         return "Train number: " + this.trainNumber + "\n" +
-                "Departure line: " + this.departureLine + "\n" +
+                "Departure Line: " + this.departureLine + "\n" +
                 "Destination: " + this.destination + "\n" +
                 "Departure time: " + this.departureTime + "\n" +
                 "Track: " + this.track;
@@ -105,9 +105,10 @@ public class Train {
      * Sets the departure time.
      *
      * @param departureTime the departure time to set
+     * TODO:"La localtime klassen ta seg av dette"
      */
     public void setDepartureTime(String departureTime) {
-        if (departureTime.length() != 5) {
+        if ((departureTime.length() != 5) && (departureTime.charAt(2) != ':')) {
             this.departureTime = "00:00";
         } else {
             String[] time = departureTime.split(":");
@@ -132,11 +133,13 @@ public class Train {
      * @param destination the destination to set
      */
     public void setDestination(String destination) {
-        this.destination = destination;
+        if (destination == null || destination.isBlank()){
+            this.destination = "INVALID";
+        }else {this.destination = destination;}
     }
     /**
      * Sets the departure line.
-     *
+     * Departure times in norway are limited to a length of 4 in norway and always start with a capital letter and end with a number.
      * @param departureLine the departure line to set
      */
     public void setDepartureLine(String departureLine) {
@@ -174,20 +177,21 @@ public class Train {
      * @param trainNumber the train number to set
      */
     public void setTrainNumber(String trainNumber) {
-        boolean check = false;
+        boolean isInvalid = false;
         String[] number = trainNumber.split("");
-        this.trainNumber = "";
+        String tempTrainNumber = "";
             for (int i = 0; i < number.length; i++) {
                 //checks if the string is a number or a capital letters, symbols are not allowed.
                 if (number[i].matches("[0-9]")) {
-                    this.trainNumber += number[i];
-                }
-                else{
-                    check = true;
+                    tempTrainNumber += number[i];
+                } else{
+                    isInvalid = true;
                 }
             }
-            if (check == true){
+            if (isInvalid == true){
                 this.trainNumber = "INVALID";
+            } else {
+                this.trainNumber = tempTrainNumber;
             }
         }
 
