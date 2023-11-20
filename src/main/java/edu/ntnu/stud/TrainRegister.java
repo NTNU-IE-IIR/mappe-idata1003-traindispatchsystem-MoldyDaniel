@@ -11,7 +11,9 @@ public class TrainRegister {
         this.trains = new HashMap<>();
         this.TrainClock = new Clock();
     }
-
+    /**
+     * Make removing trains after departure time has passed work as a function instead of automatically.
+     */
     /**
      * Adds the trainClock to the trainRegister.
      * @param increase the amount of time to increase the clock by.
@@ -34,6 +36,13 @@ public class TrainRegister {
     public String getTrainClock(){
         return TrainClock.getTime();
     }
+
+    /**
+     * Adds the train to the trainRegister if the train number is unique
+     * and the departure line, destination and departure time is valid.
+     * @param train
+     * @return true if the train is added to the trainRegister.
+     */
     public boolean addTrains(Train train){
         if(this.trains.containsKey(train.getTrainNumber()) || train.getTrainNumber().equals("INVALID")){
             return false;
@@ -46,7 +55,13 @@ public class TrainRegister {
             return true;
         }
     }
-
+    public boolean removeTrain(String trainNumber){
+        if(this.trains.containsKey(trainNumber)){
+            this.trains.remove(trainNumber);
+            return true;
+        }
+        return false;
+    }
     /**
      * Removes the train from the trainRegister if the train is behind the current time.
      * @param train
@@ -74,14 +89,11 @@ public class TrainRegister {
 
     /**
      * TODO: Handle the output in the UI class. Only return the values.
-     * @return
+     * Return the trainRegister as a get function.
+     * @return the trainRegister.
      */
-    public String displayTrainRegister(){
-        String trainRegister = "";
-        for(Train train : this.trains.values()){
-            trainRegister += train.trainToString() + "\n" + "-----------------------------------" + "\n";
-        }
-        return trainRegister;
+    public HashMap<String,Train> getTrainRegister(){
+        return trains;
     }
 
     /**
@@ -104,24 +116,28 @@ public class TrainRegister {
      * TODO: Return value instead of printing.
      * @param destination
      */
-    public void getTrainByDestination(String destination){
+    public Train getTrainByDestination(String destination){
         for(Train train : this.trains.values()){
             if(train.getDestination().equals(destination)){
-                System.out.println(train.trainToString());
+                return train;
             }
         }
+        return null;
     }
 
     /**
      * TODO: Return value instead of printing.
+     *
      * @param trainNumber
+     * @return
      */
-    public void getTrainByTrainNumber(String trainNumber){
+    public Train getTrainByTrainNumber(String trainNumber){
         for(Train train : this.trains.values()){
             if(train.getTrainNumber().equals(trainNumber)){
-                System.out.println(train.trainToString());
+                return train;
             }
         }
+        return null;
     }
 }
 

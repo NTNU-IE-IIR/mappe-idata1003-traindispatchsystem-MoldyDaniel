@@ -34,6 +34,7 @@ public class Train {
      * Returns a string representation of the train object.
      *
      * @return a string representation of the train object.
+     * TODO: Might remove this function because strings should be in the ui class.
      */
     public String trainToString() {
         return "Train number: " + this.trainNumber + "\n" +
@@ -108,7 +109,7 @@ public class Train {
      * TODO:"La localtime klassen ta seg av dette"
      */
     public void setDepartureTime(String departureTime) {
-        if ((departureTime.length() != 5) && (departureTime.charAt(2) != ':')) {
+        if ((departureTime.length() != 5) && (departureTime.charAt(3) != ':')) {
             this.departureTime = "00:00";
         } else {
             String[] time = departureTime.split(":");
