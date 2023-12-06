@@ -15,7 +15,7 @@ public class TrainTest {
      * Initialize the trainRegister object before each test.
      */
     @BeforeEach
-    public void init() {
+    void init() {
         this.trainRegister = new TrainRegister();
         this.train = new Train("123", "A1", "Oslo", "12:00", 1);
     }
@@ -24,14 +24,14 @@ public class TrainTest {
      * Removes all trains from the trainRegister after each test.
      */
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         this.trainRegister = null;
     }
     /**
      * Test that the trainToString method returns the correct string.
      */
     @Test
-    public void testTrainToStringWithValidInput() {
+    void testTrainToStringWithValidInput() {
 
         String expected = "Train number: 123\n" +
                 "Departure Line: A1\n" +
@@ -45,7 +45,7 @@ public class TrainTest {
      * Test that the getTrainNumber method returns the correct train number.
      */
     @Test
-    public void testGetTrainNumberWithValidInput() {
+    void testGetTrainNumberWithValidInput() {
         String expected = "123";
         String actual = train.getTrainNumber();
         assertEquals(expected, actual);
@@ -54,7 +54,7 @@ public class TrainTest {
      * Test that the getTrainNumber method returns the incorrect train number.
      */
     @Test
-    public void testGetDepartureLineWithValidInput() {
+    void testGetDepartureLineWithValidInput() {
         String expected = "A1";
         String actual = train.getDepartureLine();
         assertEquals(expected, actual);
@@ -63,7 +63,7 @@ public class TrainTest {
      * Test that the getDestination method returns the correct destination.
      */
     @Test
-    public void testGetDestinationWithValidInput() {
+    void testGetDestinationWithValidInput() {
         String expected = "Oslo";
         String actual = train.getDestination();
         assertEquals(expected, actual);
@@ -72,7 +72,7 @@ public class TrainTest {
      * Test that the getDepartureTime method returns the correct departure time.
      */
     @Test
-    public void testGetDepartureTimeWithValidInput() {
+    void testGetDepartureTimeWithValidInput() {
         String expected = "12:00";
         String actual = train.getDepartureTime();
         assertEquals(expected, actual);
@@ -82,7 +82,7 @@ public class TrainTest {
      * Test that the getTrack method returns the correct track number.
      */
     @Test
-    public void testGetTrackWithValidInput() {
+    void testGetTrackWithValidInput() {
         int expected = 1;
         int actual = train.getTrack();
         assertEquals(expected, actual);
@@ -91,7 +91,7 @@ public class TrainTest {
      * Test that the setTrainNumber method sets the correct train number.
      */
     @Test
-    public void testSetTrainNumberWithValidInput() {
+    void testSetTrainNumberWithValidInput() {
         String expected = "124";
         train.setTrainNumber("124");
         String actual = train.getTrainNumber();
@@ -101,7 +101,7 @@ public class TrainTest {
      * Test that the setTrainNumber method sets the incorrect train number.
      */
     @Test
-    public void testSetTrainNumberWithInvalidInput() {
+    void testSetTrainNumberWithInvalidInput() {
         String expected = "INVALID";
         train.setTrainNumber("-124B");
         String actual = train.getTrainNumber();
@@ -111,7 +111,7 @@ public class TrainTest {
      * Test that the setDepartureLine method sets the correct departure line.
      */
     @Test
-    public void testSetDepartureLineWithValidInput() {
+    void testSetDepartureLineWithValidInput() {
         String expected = "A2";
         train.setDepartureLine("A2");
         String actual = train.getDepartureLine();
@@ -121,7 +121,7 @@ public class TrainTest {
      * Test that the setDepartureLine method sets the incorrect departure line.
      */
     @Test
-    public void testSetDepartureLineWithInvalidInput() {
+    void testSetDepartureLineWithInvalidInput() {
         String expected = "INVALID";
         train.setDepartureLine("222A");
         String actual = train.getDepartureLine();
@@ -131,7 +131,7 @@ public class TrainTest {
      * Test that the setDestination method sets the correct destination.
      */
     @Test
-    public void testSetDestinationWithValidInput() {
+    void testSetDestinationWithValidInput() {
         String expected = "Trondheim";
         train.setDestination("Trondheim");
         String actual = train.getDestination();
@@ -141,7 +141,7 @@ public class TrainTest {
      * Test that the setDepartureTime method sets the correct departure time.
      */
     @Test
-    public void testSetDepartureTimeWithValidInput() {
+    void testSetDepartureTimeWithValidInput() {
         String expected = "12:01";
         train.setDepartureTime("12:01");
         String actual = train.getDepartureTime();
@@ -151,7 +151,7 @@ public class TrainTest {
      * Test that the setDepartureTime method sets the incorrect departure time.
      */
     @Test
-    public void testSetDepartureTimeWithInvalidInput() {
+    void testSetDepartureTimeWithInvalidInput() {
         String expected = "00:00";
         train.setDepartureTime("12:011");
         String actual = train.getDepartureTime();
@@ -161,7 +161,7 @@ public class TrainTest {
      * Test that the setTrack method sets the correct track number.
      */
     @Test
-    public void testSetTrackWithValidInput() {
+    void testSetTrackWithValidInput() {
         int expected = 2;
         train.setTrack(2);
         int actual = train.getTrack();
@@ -171,7 +171,7 @@ public class TrainTest {
      * Test that the setTrack method sets the incorrect track number.
      */
     @Test
-    public void testSetTrackWithInvalidInput() {
+    void testSetTrackWithInvalidInput() {
         int expected = -1;
         train.setTrack(-2);
         int actual = train.getTrack();

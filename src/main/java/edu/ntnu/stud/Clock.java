@@ -12,12 +12,16 @@ public class Clock {
         time = LocalTime.MIN;
     }
     /**
+     * Returns the current hour of the day.
+     *
      * @return the current hour of the day
      */
     public int getHours() {
         return this.time.getHour();
     }
      /**
+      * Returns the current minute of the hour.
+      *
      * @return the current minute of the hour
      */
     public int getMinutes() {
@@ -31,6 +35,7 @@ public class Clock {
 }
      /**
      * Advance the time by the given number of minutes.
+      * TODO:Maybe return true or false to let Ui class know if something went wrong without needing to use print.
      */
     public void increment(String timeIncrease,String timeHold) {
         if (timeIncrease.length() != 5) {
@@ -48,6 +53,28 @@ public class Clock {
                 this.time = LocalTime.parse(timeHold).plusHours(hours).plusMinutes(minutes);
             }
         }
+    }
+
+    /**
+     * Sets the time to the given time as long as it is after the already set time.
+     *
+     * @param inputTime
+     * @return
+     */
+    public boolean setTime(String inputTime){
+        boolean result;
+        try {
+            if (this.time.isBefore(LocalTime.parse(inputTime))) {
+                this.time = LocalTime.parse(inputTime);
+                result = true;
+            } else {
+                result = false;
+            }
+        }catch (Exception dateTimeParseException){
+            result = false;
+        }
+        return result;
+
     }
 }
 

@@ -16,14 +16,13 @@ public class TrainDispatchAppUI {
     private static final int ADD_NEW_TRAIN = 1;
     private static final int PRINT_ALL_TRAINS = 2;
     private static final int PRINT_ALL_TRAINS_BY_DEPARTURE = 3;
-    private static final int INCREMENT_CLOCK = 4;
-    private static final int SET_CLOCK = 5;
-    private static final int SET_TRACK_BY_TRAIN_NUMBER = 6;
-    private static final int SET_DELAY_BY_TRAIN_NUMBER = 7;
-    private static final int SET_DEPARTURE_TIME_BY_TRAIN_NUMBER = 8;
-    private static final int DELETE_TRAIN_BY_TRAIN_NUMBER = 9;
-    private static final int EXIT = 10;
-    private static final int MAX_MENU_CHOICE = 10;
+    private static final int SET_CLOCK = 4;
+    private static final int SET_TRACK_BY_TRAIN_NUMBER = 5;
+    private static final int SET_DELAY_BY_TRAIN_NUMBER = 6;
+    private static final int SET_DEPARTURE_TIME_BY_TRAIN_NUMBER = 7;
+    private static final int DELETE_TRAIN_BY_TRAIN_NUMBER = 8;
+    private static final int EXIT = 9;
+    private static final int MAX_MENU_CHOICE = 9;
 
     public TrainDispatchAppUI() {
         //Intentionally empty
@@ -70,13 +69,12 @@ public class TrainDispatchAppUI {
         System.out.println("1. Add new train");
         System.out.println("2. Print all trains");
         System.out.println("3. Print next departure");
-        System.out.println("4. Increment clock");
-        System.out.println("5. Set clock");
-        System.out.println("6. Set track by train number");
-        System.out.println("7. Set delay by train number");
-        System.out.println("8. Set departure time by train number");
-        System.out.println("9. Delete train by train number");
-        System.out.println("10. Exit");
+        System.out.println("4. Set clock");
+        System.out.println("5. Set track by train number");
+        System.out.println("6. Set delay by train number");
+        System.out.println("7. Set departure time by train number");
+        System.out.println("8. Delete train by train number");
+        System.out.println("9. Exit");
     }
 
     /**
@@ -102,9 +100,6 @@ public class TrainDispatchAppUI {
                 break;
             case PRINT_ALL_TRAINS_BY_DEPARTURE:
                 //this.printAllTrainsByDeparture();
-                break;
-            case INCREMENT_CLOCK:
-                //this.incrementClock();//TODO: Fix the clock.
                 break;
             case SET_CLOCK:
                 //this.setClock();//TODO: Fix the clock.
