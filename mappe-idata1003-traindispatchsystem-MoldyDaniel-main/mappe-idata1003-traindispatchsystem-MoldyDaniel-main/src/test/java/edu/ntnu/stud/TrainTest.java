@@ -25,20 +25,6 @@ public class TrainTest {
     this.trainRegister = null;
   }
 
-  /** Test that the trainToString method returns the correct string. */
-  @Test
-  void testTrainToStringWithValidInput() {
-
-    String expected =
-        "Train number: 123\n"
-            + "Departure Line: A1\n"
-            + "Destination: Oslo\n"
-            + "Departure time: 12:00\n"
-            + "Track: 1";
-    String actual = train.trainToString();
-    assertEquals(expected, actual);
-  }
-
   /** Test that the getTrainNumber method returns the correct train number. */
   @Test
   void testGetTrainNumberWithValidInput() {

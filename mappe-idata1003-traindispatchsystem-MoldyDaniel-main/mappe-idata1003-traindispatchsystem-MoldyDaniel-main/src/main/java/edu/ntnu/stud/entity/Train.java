@@ -1,5 +1,8 @@
 package edu.ntnu.stud.entity;
 
+import java.time.LocalTime;
+import java.util.stream.*;
+
 /**
  * The Train class is used to store information about the trains.
  * The class will store information about the train number,
@@ -10,6 +13,7 @@ public class Train {
   private String departureLine;
   private String destination;
   private String departureTime;
+  private String delay = "00:00";
   private int track;
 
   /**
@@ -36,30 +40,8 @@ public class Train {
     this.setDepartureLine(departureLine);
     this.setDestination(destination);
     this.setDepartureTime(departureTime);
+    this.setDelay(delay);
     this.setTrack(track);
-  }
-
-  /**
-   * Returns a string representation of the train object.
-   *
-   * @return a string representation of the train object. TODO: Might remove this function because
-   *     strings should be in the ui class.
-   */
-  public String trainToString() {
-    return "Train number: "
-        + this.trainNumber
-        + "\n"
-        + "Departure Line: "
-        + this.departureLine
-        + "\n"
-        + "Destination: "
-        + this.destination
-        + "\n"
-        + "Departure time: "
-        + this.departureTime
-        + "\n"
-        + "Track: "
-        + this.track;
   }
 
   /**
@@ -178,6 +160,34 @@ public class Train {
         }
       }
     }
+  }
+
+  /**
+   * Sets the delay of the train. If the delay is not within the "tt:mm" format for the localtime
+   * class, the delay will be set to "00:00". If the delay is within the "tt:mm" format for the
+   * localtime class, the delay will be set to the given delay.
+   *
+   * @param delay the delay of the train.
+   */
+  public void setDelay(String delay) {
+    try {
+      if (LocalTime.parse(delay).equals(LocalTime.parse("00:00"))) {
+        this.delay = "00:00";
+      } else {
+        this.delay = delay;
+      }
+    } catch (Exception dateTimeParseException) {
+      this.delay = "00:00";
+    }
+  }
+
+   /**
+   * Returns the delay.
+   *
+   * @return the delay
+   */
+  public String getDelay() {
+    return delay;
   }
 
   /**

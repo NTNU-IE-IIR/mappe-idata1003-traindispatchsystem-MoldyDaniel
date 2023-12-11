@@ -18,7 +18,7 @@ public class TrainDispatchApp {
 
   /// **
   // * Start the application.
-  // * While strating the Clock and Departures classes while displaying the current time and the
+  // * While starting the Clock and Departures classes while displaying the current time and the
   // next departure.
   // * Detect what the user writes into the console and convert it to an integer.
   // * Then make the clock tick the amount of minutes the user wrote and display the new time.

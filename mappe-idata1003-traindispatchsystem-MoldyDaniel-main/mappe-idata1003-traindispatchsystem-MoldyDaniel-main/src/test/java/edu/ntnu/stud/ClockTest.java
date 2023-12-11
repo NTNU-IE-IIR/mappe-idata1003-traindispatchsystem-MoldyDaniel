@@ -1,10 +1,10 @@
 package edu.ntnu.stud;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import edu.ntnu.stud.entity.Clock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /** This class is used to test the Clock class. */
 public class ClockTest {
@@ -44,11 +44,17 @@ public class ClockTest {
 
   /** Test that the setTime method returns the correct time. */
   @Test
-  void testSetTimeWithInvalidInput() {
+  void testSetTimeWithValidInput() {
     time.setTime("01:01");
     String expected = "01:01";
     String actual = time.getTime();
     assertEquals(expected, actual);
+  }
+
+  @Test
+  void testSetTimeWithInvalidInput() {
+    time.setTime("01:011");
+    assertEquals("00:00", time.getTime());
   }
 
   /** Test that the isBefore method works. */

@@ -3,6 +3,8 @@ package edu.ntnu.stud.ui;
 import edu.ntnu.stud.entity.Clock;
 import edu.ntnu.stud.entity.Train;
 import edu.ntnu.stud.logic.TrainRegister;
+
+import javax.print.attribute.standard.Destination;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,14 +20,16 @@ public class TrainDispatchAppUI {
   private static final int ADD_NEW_TRAIN = 1;
 
   private static final int PRINT_ALL_TRAINS = 2;
-  private static final int PRINT_ALL_TRAINS_BY_DEPARTURE = 3;
+  private static final int PRINT_ALL_TRAINS_BY_DEPARTURE_TIME = 3;
   private static final int SET_CLOCK = 4;
   private static final int SET_TRACK_BY_TRAIN_NUMBER = 5;
   private static final int SET_DELAY_BY_TRAIN_NUMBER = 6;
   private static final int SET_DEPARTURE_TIME_BY_TRAIN_NUMBER = 7;
   private static final int DELETE_TRAIN_BY_TRAIN_NUMBER = 8;
-  private static final int EXIT = 9;
-  private static final int MAX_MENU_CHOICE = 9;
+  private static final int PRINT_ALL_TRAINS_BY_DESTINATION = 9;
+  private static final int EXIT = 10;
+  private static final int MAX_MENU_CHOICE = 10;
+
   // The register of trains holding all the trains.
   private TrainRegister trainRegister;
   // The train class.
@@ -73,13 +77,14 @@ public class TrainDispatchAppUI {
     System.out.println("Please select an action:");
     System.out.println("1. Add new train");
     System.out.println("2. Print all trains");
-    System.out.println("3. Print next departure");
+    System.out.println("3. Print departures sorted by departure time");
     System.out.println("4. Set clock");
     System.out.println("5. Set track by train number");
     System.out.println("6. Set delay by train number");
     System.out.println("7. Set departure time by train number");
     System.out.println("8. Delete train by train number");
-    System.out.println("9. Exit");
+    System.out.println("9. Print all trains by destination");
+    System.out.println("10. Exit");
   }
 
   /**
@@ -102,11 +107,11 @@ public class TrainDispatchAppUI {
       case PRINT_ALL_TRAINS:
         this.printAllTrains();
         break;
-      case PRINT_ALL_TRAINS_BY_DEPARTURE:
-        // this.printAllTrainsByDeparture();
+      case PRINT_ALL_TRAINS_BY_DEPARTURE_TIME:
+        this.printAllTrainsByDeparture();
         break;
       case SET_CLOCK:
-        this.setClock(); // TODO: Fix the clock.
+        this.setClock();
         break;
       case SET_TRACK_BY_TRAIN_NUMBER:
         this.setTrackByTrainNumber();
@@ -119,6 +124,9 @@ public class TrainDispatchAppUI {
         break;
       case DELETE_TRAIN_BY_TRAIN_NUMBER:
         this.deleteTrainByTrainNumber();
+        break;
+      case PRINT_ALL_TRAINS_BY_DESTINATION:
+        this.printAllTrainsByDestination();
         break;
       case EXIT:
         result = false;
@@ -198,7 +206,21 @@ public class TrainDispatchAppUI {
   }
 
   private void printAllTrainsByDeparture() {
-    // System.out.println(this.trainRegister.displayTrainRegisterByDeparture());
+    // Print out the new sorted list of trains.
+    for (Train train : this.trainRegister.sortTrainsByDepartureTime()) {
+      printFormat(train);
+    }
+
+  }
+
+  private void printAllTrainsByDestination() {
+    Scanner userInput = new Scanner(System.in);
+    System.out.println("Please enter the destination:");
+    String input = userInput.nextLine();
+    for (Train train : this.trainRegister.getTrainsByDestination(input)) {
+      printFormat(train);
+    }
+
   }
 
   /** Sets the clock to the time the user wants. */
@@ -213,6 +235,7 @@ public class TrainDispatchAppUI {
     // delete it if it is.
     // Create arraylist and add the train numbers to it.
     // Then go through the arraylist and delete the trains.
+    //TODO: Might be too much work for the UI class. Might be better to do it in the TrainRegister class.
     ArrayList<String> selectedTrainNumber = new ArrayList<>();
     for (Train train : this.trainRegister.getTrainRegister().values()) {
       if (clock.isBefore(train.getDepartureTime(), clock.getTime())) {
@@ -240,7 +263,7 @@ public class TrainDispatchAppUI {
     String trainNumber = userInput.nextLine();
     System.out.println("Please enter the delay in minutes:");
     String delay = userInput.nextLine();
-    this.trainRegister.departure(trainNumber, delay);
+    this.trainRegister.getTrainByTrainNumber(trainNumber).setDelay(delay);
   }
 
   private void setDepartureTimeByTrainNumber() {
