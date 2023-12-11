@@ -23,6 +23,10 @@ public class TrainRegister {
   private final HashMap<String, Train> trains;
   private Train train;
   private Clock clock = new Clock();
+  private String trainNumber;
+  private ArrayList<String> trainNumbers = new ArrayList<>();
+
+  /** Create a new instance of the TrainRegister object. */
 
 
   public TrainRegister() {
@@ -37,7 +41,7 @@ public class TrainRegister {
    * @return true if the train is added to the trainRegister.
    */
   public boolean addTrains(Train train) {
-    if (this.trains.containsKey(train.getTrainNumber())
+    if (this.trainNumbers.contains(train.getTrainNumber())
         || train.getTrainNumber().equals("INVALID")) {
       return false;
     }
@@ -46,6 +50,7 @@ public class TrainRegister {
         || train.getDepartureTime().equals("INVALID")) {
       return false;
     } else {
+      trainNumbers.add(train.getTrainNumber());
       this.trains.put(train.getTrainNumber(), train);
       return true;
     }
