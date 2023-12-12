@@ -1,4 +1,4 @@
-package edu.ntnu.stud.logic;
+package edu.ntnu.stud;
 
 import edu.ntnu.stud.ui.TrainDispatchAppUI;
 
@@ -15,6 +15,8 @@ import edu.ntnu.stud.ui.TrainDispatchAppUI;
  *   <li>Initializes and starts the application by creating an instance of {@link
  *       TrainDispatchAppUI}.
  * </ul>
+ * @author Daniel
+ * @version 2023-12-12
  */
 @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
 public class TrainDispatchApp {

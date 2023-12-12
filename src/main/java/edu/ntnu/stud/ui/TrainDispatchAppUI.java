@@ -23,6 +23,9 @@ import java.util.Scanner;
  *   <li>Print all trains by destination
  *   <li>Exit the application
  * </ul>
+ *
+ * @author Daniel
+ * @version 2023-12-12
  */
 @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
 public class TrainDispatchAppUI {
@@ -68,7 +71,7 @@ public class TrainDispatchAppUI {
       displayMenu();
       trainRegister.deleteTrainAfterTime(this.trainRegister.getTrainRegister(), this.clock);
       int selectedMenu = getUsersMenuChoice();
-      if (!excetuteMenuChoice(selectedMenu)) {
+      if (!executeMenuChoice(selectedMenu)) {
         finished = true;
       }
     }
@@ -107,7 +110,7 @@ public class TrainDispatchAppUI {
    * @param selectedMenu The selected menu choice.
    * @return {@code false} if the user wants to exit the application, otherwise {@code true}.
    */
-  private boolean excetuteMenuChoice(int selectedMenu) {
+  private boolean executeMenuChoice(int selectedMenu) {
     boolean result = true;
 
     switch (selectedMenu) {

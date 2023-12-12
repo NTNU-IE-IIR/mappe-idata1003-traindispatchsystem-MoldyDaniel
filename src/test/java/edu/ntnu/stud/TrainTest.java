@@ -8,7 +8,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/** This class is used to test the Train class. */
+/** This class is used to test the Train class.
+ * @author Daniel
+ * @version 2023-12-12 */
 public class TrainTest {
   private TrainRegister trainRegister;
   private Train train;
