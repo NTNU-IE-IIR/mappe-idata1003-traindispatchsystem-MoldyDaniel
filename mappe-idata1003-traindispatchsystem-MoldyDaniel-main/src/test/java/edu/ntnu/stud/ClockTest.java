@@ -1,10 +1,10 @@
 package edu.ntnu.stud;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import edu.ntnu.stud.entity.Clock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /** This class is used to test the Clock class. */
 public class ClockTest {

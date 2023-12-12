@@ -3,13 +3,26 @@ package edu.ntnu.stud.ui;
 import edu.ntnu.stud.entity.Clock;
 import edu.ntnu.stud.entity.Train;
 import edu.ntnu.stud.logic.TrainRegister;
-
-import javax.print.attribute.standard.Destination;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * This is the main class for the train dispatch application.
+ * Represents the User Interface of the Train Dispatch Application. The User Interface (UI) is a
+ * text-based menu-controlled system.
+ *
+ * <p>Through the menu, the user can perform the following actions:
+ *
+ * <ul>
+ *   <li>Add a new train to the register
+ *   <li>List all trains
+ *   <li>Print details of trains by departure time
+ *   <li>Set clock time
+ *   <li>Set track number by train number
+ *   <li>Set delay by train number
+ *   <li>Set departure time by train number
+ *   <li>Delete a train by train number
+ *   <li>Print all trains by destination
+ *   <li>Exit the application
+ * </ul>
  */
 @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
 public class TrainDispatchAppUI {
@@ -47,16 +60,14 @@ public class TrainDispatchAppUI {
     trainRegister.fillTrainRegister();
     this.clock = new Clock();
   }
-  /**
-     * The main loop of the application. This loop runs until the user wants to exit the
-     * application. The user is presented with a menu, and the user's choice is executed.
-     */
-    
+
+  /** Main loop of the application where the user interacts through a menu system. */
   public void start() {
     boolean finished = false;
     while (!finished) {
       printWelcomeScreen();
       displayMenu();
+      trainRegister.deleteTrainAfterTime(this.trainRegister.getTrainRegister(), this.clock);
       int selectedMenu = getUsersMenuChoice();
       if (!excetuteMenuChoice(selectedMenu)) {
         finished = true;
@@ -66,13 +77,13 @@ public class TrainDispatchAppUI {
     System.out.println("Thank you for using the Train Dispatch Application. Bye!");
   }
 
-  /** Prints a welcome screen to the console. */
+  /** Prints a welcome message at the start of the application. */
   private void printWelcomeScreen() {
     System.out.println("\n Welcome to the Train Dispatch Application " + VERSION);
     System.out.println("========================================");
   }
 
-  /** Displays the menu to the user. */
+  /** Displays the menu options to the user. */
   private void displayMenu() {
     System.out.println("Please select an action:");
     System.out.println("1. Add new train");
@@ -88,14 +99,14 @@ public class TrainDispatchAppUI {
   }
 
   /**
-   * Excetutes the menu choice the user selected.
+   * Executes the selected menu choice by the user.
    *
    * <p>If the choice is a valid option, the command is executed, and {@code true} is returned
    *
    * <p>If the user decided to exit the application, {@code false} is returned
    *
-   * @param selectedMenu the menu choice.
-   * @return false if user wants to exit the application, otherwise true.
+   * @param selectedMenu The selected menu choice.
+   * @return {@code false} if the user wants to exit the application, otherwise {@code true}.
    */
   private boolean excetuteMenuChoice(int selectedMenu) {
     boolean result = true;
@@ -160,12 +171,14 @@ public class TrainDispatchAppUI {
     return selectedMenu;
   }
 
-  /** Adds a new train to the register. */
+  /** Adds a new train to the trainRegister. */
   private void addNewTrain() {
     Scanner userInput = new Scanner(System.in);
     System.out.println("Please enter the train number:");
+    @SuppressWarnings("checkstyle:VariableDeclarationUsageDistance")
     String trainNumber = userInput.nextLine();
     System.out.println("Please enter the departure line:");
+    @SuppressWarnings("checkstyle:VariableDeclarationUsageDistance")
     String departureLine = userInput.nextLine();
     System.out.println("Please enter the destination:");
     String destination = userInput.nextLine();
@@ -177,6 +190,11 @@ public class TrainDispatchAppUI {
         new Train(trainNumber, departureLine, destination, departureTime, track));
   }
 
+  /**
+   * Prints the train in a specific format.
+   *
+   * @param train The train to be printed.
+   */
   private void printFormat(Train train) {
     System.out.println(
         "Train number:"
@@ -191,12 +209,16 @@ public class TrainDispatchAppUI {
             + "Departure time:"
             + train.getDepartureTime()
             + "\n"
+            + "Delayed to:"
+            + clock.getDelayPlusDepartureTime(train.getDepartureTime(), train.getDelay())
+            + "\n"
             + "Track:"
             + train.getTrack()
             + "\n"
             + "=======================================");
   }
 
+  /** Prints all the trains in the trainRegister. */
   private void printAllTrains() {
     System.out.println("The Clock is " + this.clock.getTime());
     System.out.println("=======================================");
@@ -205,14 +227,15 @@ public class TrainDispatchAppUI {
     }
   }
 
+  /** Prints all the trains in the trainRegister sorted by departure time. */
   private void printAllTrainsByDeparture() {
     // Print out the new sorted list of trains.
     for (Train train : this.trainRegister.sortTrainsByDepartureTime()) {
       printFormat(train);
     }
-
   }
 
+  /** Prints all the trains in the trainRegister with the specified destination. */
   private void printAllTrainsByDestination() {
     Scanner userInput = new Scanner(System.in);
     System.out.println("Please enter the destination:");
@@ -220,34 +243,19 @@ public class TrainDispatchAppUI {
     for (Train train : this.trainRegister.getTrainsByDestination(input)) {
       printFormat(train);
     }
-
   }
 
-  /** Sets the clock to the time the user wants. */
+  /** Sets the clock time based on user input. */
   private void setClock() {
     Scanner userInput = new Scanner(System.in);
     System.out.println(
-        "Please enter the what you want the clock to " 
-                + "be after the already set time in the 'hh:mm' format:");
+        "Please enter the what you want the clock to "
+            + "be after the already set time in the 'hh:mm' format:");
     String input = userInput.nextLine();
     this.clock.setTime(input);
-    // Go through the train class and check if the departure time is after the clock time then
-    // delete it if it is.
-    // Create arraylist and add the train numbers to it.
-    // Then go through the arraylist and delete the trains.
-    //TODO: Might be too much work for the UI class. Might be better to do it in the TrainRegister class.
-    ArrayList<String> selectedTrainNumber = new ArrayList<>();
-    for (Train train : this.trainRegister.getTrainRegister().values()) {
-      if (clock.isBefore(train.getDepartureTime(), clock.getTime())) {
-        selectedTrainNumber.add(train.getTrainNumber());
-      }
-    }
-    for (String trainNumber : selectedTrainNumber) {
-      this.trainRegister.removeTrain(trainNumber);
-    }
   }
 
-  /** TODO:Set up guard cases for the methods. */
+  /** Sets the track number for a specific train based on user input. */
   private void setTrackByTrainNumber() {
     Scanner userInput = new Scanner(System.in);
     System.out.println("Please enter the train number:");
@@ -257,24 +265,28 @@ public class TrainDispatchAppUI {
     this.trainRegister.getTrainByTrainNumber(trainNumber).setTrack(track);
   }
 
+  /** Sets the delay for a specific train based on user input. */
   private void setDelayByTrainNumber() {
     Scanner userInput = new Scanner(System.in);
     System.out.println("Please enter the train number:");
     String trainNumber = userInput.nextLine();
-    System.out.println("Please enter the delay in minutes:");
+    System.out.println("Please enter the delay in the 'hh:mm' format:");
     String delay = userInput.nextLine();
-    this.trainRegister.getTrainByTrainNumber(trainNumber).setDelay(delay);
+    train = this.trainRegister.getTrainByTrainNumber(trainNumber);
+    train.setDelay(delay);
   }
 
+  /** Sets the departure time for a specific train based on user input. */
   private void setDepartureTimeByTrainNumber() {
     Scanner userInput = new Scanner(System.in);
     System.out.println("Please enter the train number:");
     String trainNumber = userInput.nextLine();
-    System.out.println("Please enter the new departure time:");
+    System.out.println("Please enter the new departure time in the 'hh:mm' format:");
     String departureTime = userInput.nextLine();
     this.trainRegister.getTrainByTrainNumber(trainNumber).setDepartureTime(departureTime);
   }
 
+  /** Deletes a train from the register based on the provided train number by the user. */
   private void deleteTrainByTrainNumber() {
     Scanner userInput = new Scanner(System.in);
     System.out.println("Please enter the train number:");
