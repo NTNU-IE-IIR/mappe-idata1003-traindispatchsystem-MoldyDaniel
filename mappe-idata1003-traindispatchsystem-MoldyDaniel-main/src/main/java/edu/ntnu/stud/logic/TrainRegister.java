@@ -30,6 +30,9 @@ import java.util.HashMap;
  *   <li>{@link #sortTrainsByDepartureTime()}: Sorts trains in the register by departure time
  *   <li>{@link #getTrainByTrainNumber(String)}: Retrieves a train by its train number
  * </ul>
+ *
+ * @author Daniel
+ * @version 2023-12-12
  */
 public class TrainRegister {
   private final HashMap<String, Train> trains;

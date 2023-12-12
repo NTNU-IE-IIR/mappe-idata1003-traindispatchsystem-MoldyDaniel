@@ -17,6 +17,8 @@ import java.time.LocalTime;
  *   <li>Set the time to a given value if it's after the current time.
  *   <li>Compare two times to check if one is before the other.
  * </ul>
+ * @author Daniel
+ * @version 2023-12-12
  */
 public class Clock {
   /** Instance variable for the time. */

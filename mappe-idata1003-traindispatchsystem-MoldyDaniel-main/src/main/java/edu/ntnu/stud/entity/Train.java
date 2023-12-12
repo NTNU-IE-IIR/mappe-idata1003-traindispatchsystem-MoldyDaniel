@@ -19,6 +19,9 @@ import java.time.LocalTime;
  *       "00:00" if invalid.
  *   <li>Handle track number, ensuring it is a positive integer or setting it to -1 if invalid.
  * </ul>
+ *
+ * @author Daniel
+ * @version 2023-12-12
  */
 public class Train {
   private String trainNumber;

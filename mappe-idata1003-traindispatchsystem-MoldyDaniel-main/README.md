@@ -30,14 +30,17 @@ https://github.com/NTNU-IE-IIR/mappe-idata1003-traindispatchsystem-MoldyDaniel#l
 ## How to run the project
 
 [//]: # (TODO: Describe how to run your project here. What is the main class? What is the main method? What is the input and output of the program? What is the expected behaviour of the program?)
-The main class is called TrainDispatchSystem and the main method is called main.
-The input of the program is the user input and the output is the list of departures.
+The main class is called the TrainDispatchSystem and the main method is called main.
+The input of the program is the user input and the output of the program is the user interface.
+The expected behaviour of the program is to display the user interface and to handle the user input.
 
 ## How to run the tests
 
 [//]: # (TODO: Describe how to run the tests here.)
+You can either start the TrainDispatchApp class or run each test individually by right-clicking on the test class and select "Run 'TestClassName'".
 
 ## References
 
 [//]: # (TODO: Include references here, if any. For example, if you have used code from the course book, include a reference to the chapter.Or if you have used code from a website or other source, include a link to the source.)
 https://www.geeksforgeeks.org/sorting-a-hashmap-according-to-values/
+https://docs.oracle.com/javase/8/docs/api/overview-summary.html
